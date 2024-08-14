@@ -30,7 +30,7 @@ on:
         default: true
 env:
   POETRY_VERSION: "1.8.2"
-  TEST_TAG: "langflowai/langflow:test"
+  TEST_TAG: "langflowai/langflow:main"
 
 jobs:
   get-version:
