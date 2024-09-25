@@ -1,4 +1,5 @@
-from typing import Callable, Union, cast
+from typing import cast
+from collections.abc import Callable
 
 from pydantic import BaseModel, Field, model_serializer
 
@@ -13,7 +14,7 @@ class Template(BaseModel):
 
     def process_fields(
         self,
-        format_field_func: Union[Callable, None] = None,
+        format_field_func: Callable | None = None,
     ):
         if format_field_func:
             for field in self.fields:
@@ -55,6 +56,9 @@ class Template(BaseModel):
                     _input = Input(**value)
 
                 data["fields"].append(_input)
+        # Handles components with no inputs
+        if "fields" not in data:
+            data["fields"] = []
         return cls(**data)
 
     # For backwards compatibility
